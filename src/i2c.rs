@@ -1,7 +1,7 @@
 //! BME280 driver for sensors attached via I2C.
 
 use embedded_hal::delay::blocking::DelayUs;
-use embedded_hal::i2c::{blocking::I2c, ErrorType};
+use embedded_hal::i2c::blocking::I2c;
 
 use super::{
     BME280Common, Configuration, Error, IIRFilter, Interface, Measurements, Oversampling,
@@ -19,7 +19,7 @@ pub struct BME280<I2C> {
 
 impl<I2C> BME280<I2C>
 where
-    I2C: I2c + ErrorType,
+    I2C: I2c,
 {
     /// Create a new BME280 struct using the primary I²C address `0x76`
     pub fn new_primary(i2c: I2C) -> Self {
@@ -84,7 +84,7 @@ struct I2CInterface<I2C> {
 
 impl<I2C> Interface for I2CInterface<I2C>
 where
-    I2C: I2c + ErrorType,
+    I2C: I2c,
 {
     type Error = I2C::Error;
 
